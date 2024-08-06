@@ -33,7 +33,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       tableName: "contents", // Nombre de la tabla en la base de datos (opcional)
+    }, {
+      timestamps: false
     }
-  );
+  ); 
   return Content;
 };
