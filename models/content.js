@@ -1,11 +1,9 @@
 // Remueve esta línea porque DataTypes será pasado como un argumento en la función
 // const { DataTypes } = require('sequelize');
-
 module.exports = (sequelize, DataTypes) => {
   const Content = sequelize.define(
-    "content", // Nombre del modelo
+    "Content", 
     {
-      // Atributos del modelo
       id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -14,31 +12,28 @@ module.exports = (sequelize, DataTypes) => {
       },
       title: {
         type: DataTypes.STRING,
-        allowNull: false, // Corrige el typo de "alowNull" a "allowNull"
+        allowNull: false,
       },
       synopsis: {
         type: DataTypes.TEXT,
-        allowNull: true, // Corrige el typo de "alowNull" a "allowNull"
+        allowNull: true,
       },
       trailer_url: {
-        type: DataTypes.STRING, // Cambia VARCHAR a STRING, ya que VARCHAR no es válido en Sequelize
-        allowNull: true, // Corrige el typo de "alowNull" a "allowNull"
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       category: {
         type: DataTypes.INTEGER,
-        allowNull: false, // Corrige el typo de "alowNull" a "allowNull"
+        allowNull: false,
       },
       genre: {
         type: DataTypes.INTEGER,
-        allowNull: false, // Corrige el typo de "alowNull" a "allowNull"
+        allowNull: false,
       },
     },
     {
-      // Opciones
-      timestamps: true, // Incluye campos `createdAt` y `updatedAt`
-      underscored: true, // Utiliza snake_case en lugar de camelCase
+      tableName: "contents", // Nombre de la tabla en la base de datos (opcional)
     }
   );
-
   return Content;
 };
