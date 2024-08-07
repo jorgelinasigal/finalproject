@@ -1,0 +1,47 @@
+<!-- views/content.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contenidos</title>
+    <link rel="stylesheet" href="/css/cards.css">
+</head>
+<body class="background-black">
+    <h1 class="text-content">Todos los Contenidos</h1>
+    <div class="card-container">
+        <% contenidos.forEach(contenido => { %>
+            <div class="card">
+                <div class="trailer-container">
+                    <iframe width="300" height="200" src="<%= contenido.trailer %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <h2><%= contenido.titulo %></h2>
+                <% if (contenido.temporadas) { %>
+                    <p>Temporadas: <%= contenido.temporadas %></p>
+                <% } %>
+                <p>Duración: <%= contenido.duracion %></p>
+                <% if (contenido.categoria) { %>
+                    <p>Categoría: <%= contenido.categoria %></p>
+                <% } %>
+            </div>
+        <% }) %>
+    </div>
+
+    <!-- Navegación de paginación -->
+    <div class="pagination">
+        <!-- Valor fijo para currentPage y totalPages -->
+        <% let currentPage = 10; %>
+        <% let totalPages = 30; %>
+
+        <% if (currentPage > 1) { %>
+            <a href="/content?page=<%= currentPage - 1 %>">Anterior</a>
+        <% } %>
+        <% for (let i = 1; i <= totalPages; i++) { %>
+            <a href="/content?page=<%= i %>" class="<%= i === currentPage ? 'active' : '' %>"><%= i %></a>
+        <% } %>
+        <% if (currentPage < totalPages) { %>
+            <a href="/content?page=<%= currentPage + 1 %>">Siguiente</a>
+        <% } %>
+    </div>
+</body>
+</html>

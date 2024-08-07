@@ -1,0 +1,25 @@
+<!-- views/series.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Series</title>
+    <link rel="stylesheet" href="/css/cards.css">
+</head>
+<body class="background-black">
+    <h1 class="text-content">Series</h1>
+    <div class="card-container">
+        <% series.forEach(serie => { %>
+            <div class="card">
+                <div class="trailer-container">
+                    <iframe width="300" height="200" src="<%= serie.trailer %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <h2><%= serie.titulo %></h2>
+                <p>Temporadas: <%= serie.temporadas %></p>
+                <p>Duración: <%= serie.duracion %></p>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>

@@ -8,6 +8,7 @@
     "genero": "Ciencia Ficción",
     "resumen": "Ambientada tras la caída del Imperio y antes de la aparición de la Primera Orden, la Serie sigue los pasos de un pistolero solitario en las aventuras que protagoniza en los confines de la galaxia, donde no alcanza la autoridad de la Nueva República.",
     "temporadas": 2,
+    "duracion": "30-50 minutos",
     "reparto": "Pedro Pascal, Carl Weathers, Misty Rosas, Chris Bartlett, Rio Hackford, Giancarlo Esposito",
     "trailer": "https://www.youtube.com/embed/aOC8E8z_ifw"
   },
@@ -20,6 +21,7 @@
     "tags": "Sci-Fi, Fantasía, Drama",
     "resumen": "La muerte de su padre reúne a unos hermanos distanciados y con extraordinarios poderes que descubren impactantes secretos y una amenaza que se cierne sobre la humanidad.",
     "temporadas": 1,
+    "duracion": "86 minutos",
     "reparto": "Tom Hopper, David Castañeda, Emmy Raver-Lampman, Robert Sheehan, Aidan Gallagher, Elliot Page",
     "trailer": "https://www.youtube.com/embed/KHucKOK-Vik"
   },
@@ -32,8 +34,9 @@
     "tags": "Drama, Ficción, Sucesos",
     "resumen": "En los cincuenta, una joven de un orfanato descubre que tiene un increíble don para el ajedrez y recorre el arduo camino a la fama mientras lucha contra las adicciones.",
     "temporadas": 1,
+    "duracion": "92 minutos",
     "reparto": "Anya Taylor-Joy, Thomas Brodie-Sangster, Harry Melling, Moses Ingram, Chloe Pirrie, Janina Elkin",
-    "trailer": "https://www.youtube.com/embed/lbleRbyGKL4"
+    "trailer": "https://www.youtube.com/embed/-BBgzgNgzeQ?si=vlQ4SgxN0idKKxAal"
   },
   {
     "id": 2,
@@ -44,6 +47,7 @@
     "tags": "Drama, Misterio, Ficción",
     "resumen": "El paso a la edad adulta incluye sexo, romance, escuela y familia. Para Archie y sus amigos, también hay misterios oscuros.",
     "temporadas": 5,
+    "duracion": "107 minutos",
     "reparto": "Lili Reinhart, Casey Cott, Camila Mendes, Marisol Nichols, Madelaine Petsch, Mädchen Amick",
     "trailer": "https://www.youtube.com/embed/HxtLlByaYTc"
   },
@@ -70,7 +74,7 @@
     "temporadas": "N/A",
     "duracion": "97 minutos",
     "reparto": "Millie Bobby Brown, Henry Cavill, Sam Claflin, Helena Bonham Carter, Louis Partridge, Adeel Akhtar",
-    "trailer": "https://www.youtube.com/embed/3t1g2pa355k"
+    "trailer": "https://www.youtube.com/embed/bxG9VN9RrVs?si=CVX2Bqpzh3zgQK_0"
   },
   {
     "id": 7,
@@ -737,7 +741,7 @@
     "temporadas": "N/A",
     "duracion": "120 minutos",
     "reparto": "Noomi Rapace, Michael Fassbender, Charlize Theron, Logan Marshall-Green, Guy Pearce, Idris Elba, Sean Harris, Rafe Spall, Kate Dickie, Emut Elliott, Benedict Wong, Lucy Hutchinson, Patrick Wilson, Ian Whyte, Branwell Donaghey, Vladimir Furdik, C.C. Smiff, Shane Steyn, John Lebar",
-    "trailer": "https://www.youtube.com/embed/34cEo0VhfGE"
+    "trailer": "https://www.youtube.com/embed/MldbTQFVE6c?si=_iw3uuZLUCeC656n"
   },
   {
     "id": 60,

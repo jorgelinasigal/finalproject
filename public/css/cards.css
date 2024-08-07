@@ -1,0 +1,69 @@
+/* public/css/style.css */
+body {
+    background-color: #000;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    margin: 0;
+    padding: 0;
+    color: red;
+
+}
+.text-content {
+    max-width: 450px; 
+    text-align:justify; 
+}
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 1200px; /* Ajusta este valor según el ancho deseado */
+}
+
+.card {
+    background-color: #1c1c1c;
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card h2 {
+    margin: 10px 0;
+    font-size: 1.5em;
+    color: aliceblue;
+
+}
+
+.card p {
+    margin: 10px 0;
+    color: aliceblue;
+
+}
+
+.card .trailer-container {
+    margin-top: 10px;
+}
+
+.card iframe {
+    width: 100%;
+    height: auto;
+}
+
+.card a {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
