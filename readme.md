@@ -215,7 +215,7 @@ http://localhost:3008/series?name={name}
 ```
 Respuesta:
 
-![serienombre](./seriename/png)
+![serienombre](./seriename.png)
 
 
 [Volver a endpoints](#endpoints)
