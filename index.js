@@ -23,9 +23,11 @@ app.use(express.urlencoded({ extended: true }));
 const contentRouter = require('./routes/content');
 const peliculasRoutes = require('./routes/peliculas');
 const seriesRoutes = require('./routes/series');  
+const castRoutes = require('./routes/cast');
 app.use('/peliculas', peliculasRoutes);
 app.use('/series', seriesRoutes);
 app.use('/content', contentRouter);
+app.use('/cast', castRoutes);
 
 // Función para cargar y transformar datos
 const loadData = async () => {
@@ -63,23 +65,40 @@ const loadData = async () => {
       continue; // Salta al siguiente contenido en caso de error
     }
 
-    // Manejar actores
+    // Convierte la cadena de actores en un array
+    let actorArray = [];
+
+    if (typeof content.reparto === 'string') {
+      actorArray = content.reparto.split(',').map(actor => actor.trim());
+    } else {
+      console.warn('content.reparto no es una cadena de texto');
+    }
+
     const actorIds = [];
-    if (Array.isArray(content.actor)) {
-      for (const actor of content.actor) {
-        const nuevoActor = { name: actor.nombre };
-        let createdActor;
-        try {
-          createdActor = await Actor.create(nuevoActor);
-        } catch (error) {
-          console.error('Error al crear actor:', error);
-          continue; // Salta al siguiente actor en caso de error
+
+    if (Array.isArray(actorArray) && actorArray.length > 0) {
+      const transaction = await sequelize.transaction(); // Iniciar una transacción
+
+      try {
+        for (const actorName of actorArray) {
+          const [createdActor, created] = await Actor.findOrCreate({
+            where: { name: actorName },
+            defaults: { name: actorName },
+            transaction // Incluye la transacción en cada operación
+          });
+
+          actorIds.push(createdActor.id); // Guarda el ID del actor
         }
-        actorIds.push(createdActor.id); // Guarda el ID del actor
+
+        await transaction.commit(); // Confirma la transacción si todo fue exitoso
+      } catch (error) {
+        await transaction.rollback(); // Revierte la transacción en caso de error
+        console.error('Error al manejar actores:', error);
       }
     } else {
-      console.warn('content.actor no es un array o no está definido');
+      console.warn('actorArray no es un array o está vacío');
     }
+
 
     // Manejar reparto
     if (typeof content.reparto === 'string') {

@@ -2,24 +2,37 @@
 const express = require('express');
 const router = express.Router();
 const { Content } = require('../models'); // Asegúrate de que la importación sea correcta
+const { Op } = require('sequelize');
 
-// Obtener todas las películas
+
 router.get('/', async (req, res) => {
     try {
+        const { name } = req.query;
+        console.log('Nombre de búsqueda:', name); // Añade esta línea para depuración
+
+        const whereCondition = {
+            category_id: 2
+        };
+        
+        if (name && name.trim() !== '') {
+            whereCondition.title = {
+                [Op.like]: `%${name.trim()}%`
+            };
+        }
+        
         const peliculas = await Content.findAll({
-            where: {
-                category_id: 2 // Ajusta según tu lógica de categorías
-            }
+            where: whereCondition
         });
-        // Transformar los datos para que coincidan con los nombres de propiedad en la vista
+
         const peliculasData = peliculas.map(pelicula => ({
-            titulo: pelicula.title, // Cambia 'title' a 'titulo'
-            trailer: pelicula.trailer_url, // Cambia 'trailer_url' a 'trailer'
-            duracion: pelicula.duracion // Agrega una duración predeterminada si no la tienes en el modelo
+            titulo: pelicula.title,
+            trailer: pelicula.trailer_url,
+            duracion: pelicula.duracion
         }));
+
         res.render('Pelicula', { peliculas: peliculasData }); 
     } catch (error) {
-        console.error('Error al obtener las películas:', error);
+        console.error('Error al obtener las películas:', error.message);
         res.status(500).send('Error al obtener las películas');
     }
 });
