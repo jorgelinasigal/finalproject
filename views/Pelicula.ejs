@@ -1,0 +1,24 @@
+<!-- views/Pelicula.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Películas</title>
+    <link rel="stylesheet" href="/css/cards.css">
+</head>
+<body class="background-black">
+    <h1 class="text-content">Películas</h1>
+    <div class="card-container">
+        <% peliculas.forEach(pelicula => { %>
+            <div class="card">
+                <div class="trailer-container">
+                    <iframe width="300" height="200" src="<%= pelicula.trailer %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <h2><%= pelicula.titulo %></h2>
+                <p>Duración: <%= pelicula.duracion %></p>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>

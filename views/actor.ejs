@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Información del Actor</title>
+</head>
+<body>
+    <h1>Información del Actor</h1>
+    <h2><%= actor.nombre %> <%= actor.apellido %></h2>
+
+    <h3>Trabajos del Actor:</h3>
+    <ul>
+        <% repartos.forEach(reparto => { %>
+            <li>
+                <h4><%= reparto.PeliculaSerie.titulo %></h4>
+                <img src="<%= reparto.PeliculaSerie.poster %>" alt="<%= reparto.PeliculaSerie.titulo %>" width="200">
+                <p><strong>Categoria:</strong> <%= reparto.PeliculaSerie.categoria %></p>
+                <p><strong>Género:</strong> <%= reparto.PeliculaSerie.genero %></p>
+                <p><strong>Tags:</strong> <%= reparto.PeliculaSerie.tags %></p>
+                <p><strong>Resumen:</strong> <%= reparto.PeliculaSerie.resumen %></p>
+                <p><strong>Temporadas:</strong> <%= reparto.PeliculaSerie.temporadas %></p>
+                <p><strong>Duración:</strong> <%= reparto.PeliculaSerie.duracion %></p>
+                <p><strong>Trailer:</strong> <a href="<%= reparto.PeliculaSerie.trailer %>">Ver trailer</a></p>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>

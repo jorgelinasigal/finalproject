@@ -1,29 +1,31 @@
-require("dotenv").config();
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
-const { Sequelize, DataTypes, Op } = require("sequelize");
-const { sequelize, authenticate, closeConnection } = require("./database/db");
-
-// Inicializar los modelos
-const initContentModel = require("./models/content");
-const initActorModel = require("./models/actor");
-const initCastModel = require("./models/cast");
-const initCategoryModel = require("./models/category");
-const initGenreModel = require("./models/genre");
-
-const Content = initContentModel(sequelize, DataTypes);
-const Actor = initActorModel(sequelize, DataTypes);
-const Cast = initCastModel(sequelize, DataTypes);
-const Category = initCategoryModel(sequelize, DataTypes);
-const Genre = initGenreModel(sequelize, DataTypes);
-
-
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const { Sequelize, DataTypes, Op } = require('sequelize');
+const { sequelize, authenticate, closeConnection } = require('./database/db');
+const { Content, Cast, Actor, Genre, Category } = require('./models');
 const app = express();
-const port = process.env.PORT || 3008;
+const PORT = process.env.PORT || 3008;
+require('dotenv').config();
+
+// Configura el directorio de vistas y el motor de plantillas
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // Configuración de archivos estáticos
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Middleware para analizar cuerpos de solicitudes
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Importa y usa las rutas definidas en la carpeta routes
+const contentRouter = require('./routes/content');
+const peliculasRoutes = require('./routes/peliculas');
+const seriesRoutes = require('./routes/series');  
+app.use('/peliculas', peliculasRoutes);
+app.use('/series', seriesRoutes);
+app.use('/content', contentRouter);
 
 // Función para cargar y transformar datos
 const loadData = async () => {
@@ -111,56 +113,22 @@ const loadData = async () => {
   }
 };
 
-// Endpoint para obtener toda la tabla de contenidos
-app.get("/content", async (req, res) => {
-  try {
-    const contents = await Content.findAll();
-    res.json(contents);
-  } catch (error) {
-    console.error('Error al obtener contenidos:', error.message);
-    res.status(500).json({ error: 'Error al obtener contenidos', details: error.message });
-  }
-});
-
-// Endpoint para buscar películas por actor
-app.get("/actor/:name", async (req, res) => {
-  const { actor } = req.params;
-  try {
-    const actors = await Actor.findAll({
-      where: {
-        name: {
-          [Op.like]: `%${actor}%`
-        }
-      },
-      include: {
-        model: Cast,
-        include: {
-          model: Content,
-          include: [
-            { model: Category, attributes: ['name'] },
-            { model: Genre, attributes: ['name'] },
-          ],
-        },
-      },
-    });
-    const contents = actors.map(actor => actor.contents.map(cast => cast.Content)).flat();
-    res.json(contents);
-  } catch (error) {
-    console.error('Error al buscar contenidos por actor:', error);
-    res.status(500).json({ error: 'Error al buscar contenidos por actor' });
-  }
-});
-
+// Agregar un endpoint de ejemplo para la vista
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public', 'index.html'));
+  res.render('index'); // Renderiza la vista 'index.ejs' en la carpeta 'views'
 });
 
-app.listen(port, async () => {
+// Endpoint de prueba para verificar si el servidor está funcionando
+app.get('/test', (req, res) => {
+  res.send('El servidor está funcionando correctamente');
+});
+
+app.listen(PORT, async () => {
   try {
     await authenticate();
     await sequelize.sync({ force: false }); // Cambié { force: true } a { force: false } para no borrar y recrear las tablas cada vez
     await loadData(); // Carga los datos después de sincronizar la base de datos
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${PORT}`);
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
