@@ -70,14 +70,14 @@ Publicación del Proyecto
         El modelo diseñado para su creación.
         El código del proyecto Node.js.
         La documentación en formato Markdown.
------
-dependencias necesarias para el correcto funcionamiento:
+----- 
+dependencias necesarias para el correcto funcionamiento: 
 
-"dependencies": {
-    "dotenv": "^16.4.5",
-    "ejs": "^3.1.10",
-    "express": "^4.19.2",
-    "mysql2": "^3.11.0",
-    "node": "^22.6.0",
-    "sequelize": "^6.37.3"
+"dependencies": { 
+    "dotenv": "^16.4.5", 
+    "ejs": "^3.1.10", 
+    "express": "^4.19.2", 
+    "mysql2": "^3.11.0", 
+    "node": "^22.6.0", 
+    "sequelize": "^6.37.3" 
 }
